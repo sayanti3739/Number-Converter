@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Decimal to Binary</title>
+	<style>
+	body
+	{
+		max-width: 750px; 
+		min-width: 480px; 
+		margin: 0 auto;
+		background-color: #AAAACF;
+		color: #05045C;
+	}
+	section, h1
+	{
+	color: #05045C;
+	}
+	div
+	{
+		border: 3px double;
+		padding: 30px;
+		background-color: #B8B8D3;
+	}
+	#btns
+	{
+		margin: 0 15px;
+	}
+	h1
+	{
+		text-align: center;
+	}
+	.rbtn
+	{
+		font-size: 15px;
+	}
+	textarea
+	{
+		height: 100px;
+		width: 400px;
+		background-color: #AAAACF;
+	}
+	button, .dd
+	{
+		background-color: #AAAACF;
+	}
+	textarea:focus, button:focus
+	{
+		border-color: #080762;
+	}
+	</style>
+</head>
+<body>
+<h1>NUMBER CONVERTER</h1>
+<section><p>Enter a number with <b><em>any base</em></b> (viz. 2, 8, 10, 16) in its respective box and convert it into other bases in the press of a button.</p><br>[P.S. : You can include decimal points too :) ]<br></section><br>
+<div>
+<label for = "dd">Number of digits after decimal : </label>
+<input class = "dd" type = "number" placeholder = "0"><br><br><br>
+<label for = "decnum">The Decimal Equivalent is : </label><br>
+<textarea id="decnum" class = "decnum" name="decnum"></textarea>
+<button id = "btns" class = "btn1">CONVERT FROM DECIMAL</button><br><br><br>
+<label for = "binnum">The Binary Equivalent is : </label><br>
+<textarea id="binnum" class = "binnum" name="binnum"></textarea>
+<button id = "btns"  class = "btn2">CONVERT FROM BINARY</button><br><br><br>
+<label for = "octnum">The Octal Equivalent is : </label><br>
+<textarea id="octnum" class = "octnum" name="octnum"></textarea>
+<button id = "btns"  class = "btn3">CONVERT FROM OCTAL</button><br><br><br>
+<label for = "hexnum">The Hexa-Decimal Equivalent is : </label><br>
+<textarea id="hexnum" class = "hexnum" name="hexnum"></textarea>
+<button id = "btns"  class = "btn4">CONVERT FROM HEXADECIMAL</button><br><br><br>
+<button class = "rbtn">RESET</button>
+</div>
+<script>
+var decnum = document.querySelector('.decnum');
+var binnum = document.querySelector('.binnum');
+var octnum = document.querySelector('.octnum');
+var hexnum = document.querySelector('.hexnum');
+var dd = document.querySelector('.dd');
+var btn1 = document.querySelector('.btn1');
+var btn2 = document.querySelector('.btn2');
+var btn3 = document.querySelector('.btn3');
+var btn4 = document.querySelector('.btn4');
+var rbtn = document.querySelector('.rbtn');
+rbtn.disabled = true;
+var xd, xb, xo, xh;
+
+function convertD()
+{
+	xd = Number(decnum.value);
+	decToBin(xd.toString());
+	decToOct(xd.toString());
+	decToHex(xd.toString());
+	rbtn.disabled = false;
+}
+
+function convertB()
+{
+	xb = (binnum.value).toString();
+	var p = xb.indexOf('.');
+	if(p!=-1){
+	var num = xb.substring(0,p);
+	var t = num;
+	var y = 0;
+	var j = 0;
+	while(t>0)
+	{
+		var x = t%10;
+		var z = x*(Math.pow(2,j));
+		y = y+z;
+		j = j+1;
+		t = Math.floor(t/10);
+	}
+	y = y.toString();
+	y = y+".";
+	y = Number(y);
+	var num2 = xb.substring(p+1, xb.length);
+	var i = 0;
+	var j = -1;
+	while(i<num2.length)
+	{
+		y = y+((num2.charAt(i))*(Math.pow(2,j)));
+		i = i+1;
+		j = j-1;
+	}
+	}
+	else
+	{
+	var num = Number(binnum.value);
+	var t = num;
+	var y = 0;
+	var j = 0;
+	while(t>0)
+	{
+		var x = t%10;
+		var z = x*(Math.pow(2,j));
+		y = y+z;
+		j = j+1;
+		t = Math.floor(t/10);
+	}
+	}
+	decnum.value = y.toString();
+	decToOct(decnum.value);
+	decToHex(decnum.value);
+	rbtn.disabled = false;
+}
+
+function convertO()
+{
+	xo = (octnum.value).toString();
+	var p = xo.indexOf('.');
+	if(p!=-1){
+	var num = xo.substring(0,p);
+	var t = num;
+	var y = 0;
+	var j = 0;
+	while(t>0)
+	{
+		var x = t%10;
+		var z = x*(Math.pow(8,j));
+		y = y+z;
+		j = j+1;
+		t = Math.floor(t/10);
+	}
+	y = y.toString();
+	y = y+".";
+	y = Number(y);
+	var num2 = xo.substring(p+1, xo.length);
+	var i = 0;
+	var j = -1;
+	while(i<num2.length)
+	{
+		y = y+((num2.charAt(i))*(Math.pow(8,j)));
+		i = i+1;
+		j = j-1;
+	}
+	}
+	else
+	{
+	var num = Number(octnum.value);
+	var t = num;
+	var y = 0;
+	var j = 0;
+	while(t>0)
+	{
+		var x = t%10;
+		var z = x*(Math.pow(8,j));
+		y = y+z;
+		j = j+1;
+		t = Math.floor(t/10);
+	}
+	}
+	decnum.value = y.toString();
+	decToBin(decnum.value);
+	decToHex(decnum.value);
+	rbtn.disabled = false;
+}
+
+function convertH()
+{
+	xh = hexnum.value.toString();
+	var j = 0;
+	var t = xh;
+	var y = 0;
+	while(t.length>0)
+	{
+		var z = t.charAt(t.length-1);
+		var x;
+		if(z === 'A') x = 10;
+		else if(z === 'B') x = 11;
+		else if(z === 'C') x = 12;
+		else if(z === 'D') x = 13;
+		else if(z === 'E') x = 14;
+		else if(z === 'F') x = 15;
+		else x = Number(z);
+		y = y+(x*Math.pow(16,j));
+		j = j+1;
+		t = t.substring(0, t.length-1);
+	}
+	decnum.value = y;
+	decToOct(decnum.value.toString());
+	decToBin(decnum.value.toString());
+	rbtn.disabled = false;
+}
+
+function decToOct(str)
+{
+	var p = str.indexOf('.');
+	if(p!=-1){
+	var num = Number(str.substring(0,p+1));
+	var t = num;
+	var y = "";
+	while(t>0)
+	{
+		y = ((t%8).toString())+y;
+		t = Math.floor(t/8);
+	}
+	var num2 = Number(str.substring(p, str.length));
+	y = y+".";
+	var c = 0;
+	var flag = 0;
+	while(c<(Number(dd.value)))
+	{
+		var x2 = num2*8;
+		x2 = x2.toString();
+		p = x2.indexOf('.');
+		if((p!=-1) || (flag === 0)){
+		var ch = x2.charAt(0);
+		y = y+ch;
+		if(p === -1) flag = 1;
+		}
+		else
+		{
+			y = y+"0";
+		}
+		num2 = x2.substring(p, x2.length);
+		num2 = Number(num2);
+		c = c+1;
+	}
+	}
+	else
+	{
+		var num = Number(str);
+		var t = num;
+		var y = "";
+		while(t>0)
+		{
+		y = ((t%8).toString())+y;
+		t = Math.floor(t/8);
+	    }
+	}
+	octnum.value = y;
+}
+
+function decToBin(str)
+{
+	var p = str.indexOf('.');
+	if(p!=-1){
+	var num = Number(str.substring(0,p));
+	var t = num;
+	var y = "";
+	while(t>0)
+	{
+		y = ((t%2).toString())+y;
+		t = Math.floor(t/2);
+	}
+	var num2 = Number(str.substring(p, str.length));
+	y = y+".";
+	var c = 0;
+	var flag = 0;
+	while(c<(Number(dd.value)))
+	{
+		var x2 = num2*2;
+		x2 = x2.toString();
+		p = x2.indexOf('.');
+		if((p!=-1) || (flag === 0)){
+		var ch = x2.charAt(0);
+		y = y+ch;
+		if(p === -1) flag = 1;
+		}
+		else
+		{
+			y = y+"0";
+		}
+		num2 = x2.substring(p, x2.length);
+		num2 = Number(num2);
+		c = c+1;
+	}
+	}
+	else
+	{
+		num = Number(str);
+		var t = num;
+	    var y = "";
+	    while(t>0)
+	    {
+		    y = ((t%2).toString())+y;
+		    t = Math.floor(t/2);
+	    }
+	}
+	binnum.value = y;
+}
+
+function decToHex(str)
+{
+	var p = str.indexOf('.');
+	if(p!=-1){
+	var num = Number(str.substring(0,p+1));
+	var t = num;
+	var y = "";
+	while(t>0)
+	{
+		var num = t%16;
+		if(num === 10) ch = "A";
+		else if(num === 11) ch = "B";
+		else if(num === 12) ch = "C";
+		else if(num === 13) ch = "D";
+		else if(num === 14) ch = "E";
+		else if(num === 15) ch = "F";
+		else ch = num.toString();
+		y = ch+y;
+		t = Math.floor(t/16);
+	}
+	var num2 = Number(str.substring(p, str.length));
+	y = y+".";
+	var c = 0;
+	var flag = 0;
+	while(c<(Number(dd.value)))
+	{
+		var x2 = num2*16;
+		x2 = x2.toString();
+		p = x2.indexOf('.');
+		if((p!=-1) || (flag === 0)){
+		var ch = x2.substring(0,p);
+		if(ch.length === 1)
+		{ch = ch.charAt(0); y = y+ch;}
+		else
+		{
+			var num = Number(ch);
+			if(num === 10) ch = "A";
+			else if(num === 11) ch = "B";
+			else if(num === 12) ch = "C";
+			else if(num === 13) ch = "D";
+			else if(num === 14) ch = "E";
+			else if(num === 15) ch = "F";
+			y = y+ch;
+		}
+		if(p === -1) flag = 1;
+		}
+		else
+		{
+			y = y+"0";
+		}
+		num2 = x2.substring(p, x2.length);
+		num2 = Number(num2);
+		c = c+1;
+	}
+	}
+	else
+	{
+		var num = Number(str);
+		var t = num;
+		var y = "";
+		while(t>0)
+		{
+		var num = t%16;
+		if(num === 10) ch = "A";
+		else if(num === 11) ch = "B";
+		else if(num === 12) ch = "C";
+		else if(num === 13) ch = "D";
+		else if(num === 14) ch = "E";
+		else if(num === 15) ch = "F";
+		else ch = num.toString();
+		y = ch+y;
+		t = Math.floor(t/16);
+		}
+	}
+	hexnum.value = (y);
+}
+
+function rbtnClick()
+{
+	decnum.value = "";
+	binnum.value = "";
+	octnum.value = "";
+	hexnum.value = "";
+}
+
+btn1.onclick = convertD;
+btn2.onclick = convertB;
+btn3.onclick = convertO;
+btn4.onclick = convertH;
+rbtn.onclick = rbtnClick;
+
+</script>
+</body>
+</html>
