@@ -9,11 +9,11 @@
 		max-width: 800px; 
 		min-width: 480px; 
 		margin: 0 auto;
-		color: #000000;
+		color: #0000A0;
 	}
 	section, h1
 	{
-	color: #000000;
+	color: #0000A0;
 	}
 	div
 	{
@@ -42,7 +42,7 @@
 	{
 		height: 100px;
 		width: 400px;
-		background-color: #E6E8EE;
+		background-color: #0000A0;
 	}
 	button, .dd
 	{
@@ -87,7 +87,6 @@ var btn4 = document.querySelector('.btn4');
 var rbtn = document.querySelector('.rbtn');
 rbtn.disabled = true;
 var xd, xb, xo, xh;
-
 function convertD()
 {
 	xd = Number(decnum.value);
@@ -104,7 +103,6 @@ function convertD()
     }
 	rbtn.disabled = false;
 }
-
 function convertB()
 {
 	xb = (binnum.value).toString();
@@ -155,7 +153,6 @@ function convertB()
 	decToHex(decnum.value);
 	rbtn.disabled = false;
 }
-
 function convertO()
 {
 	xo = (octnum.value).toString();
@@ -206,7 +203,6 @@ function convertO()
 	decToHex(decnum.value);
 	rbtn.disabled = false;
 }
-
 function convertH()
 {
 	xh = hexnum.value.toString();
@@ -233,7 +229,6 @@ function convertH()
 	decToBin(decnum.value.toString());
 	rbtn.disabled = false;
 }
-
 function octEqui(str)
 {
 	var y;
@@ -248,7 +243,6 @@ function octEqui(str)
 	else if(x === 111) y = 7;
 	return y;
 }
-
 function binToOct(str)
 {
 	var y = "";
@@ -267,7 +261,6 @@ function binToOct(str)
 		}
 	octnum.value = y;
 }
-
 function hexEqui(str)
 {
 	var y;
@@ -290,7 +283,6 @@ function hexEqui(str)
 	else if(x === 1111) y = 15;
 	return y;
 }
-
 function binToHex(str)
 {
 	var y = "";
@@ -319,7 +311,6 @@ function binToHex(str)
 		}
 	hexnum.value = y;
 }
-
 function decToOct(str)
 {
 	var p = str.indexOf('.');
@@ -368,7 +359,6 @@ function decToOct(str)
 	}
 	octnum.value = y;
 }
-
 function decToBin(str)
 {
 	var nx = Number(str);
@@ -440,7 +430,6 @@ function decToBin(str)
 		binnum.value = y2; 
 	}
 }
-
 function decToHex(str)
 {
 	var p = str.indexOf('.');
@@ -517,7 +506,6 @@ function decToHex(str)
 	}
 	hexnum.value = (y);
 }
-
 function rbtnClick()
 {
 	decnum.value = "";
@@ -525,13 +513,11 @@ function rbtnClick()
 	octnum.value = "";
 	hexnum.value = "";
 }
-
 btn1.onclick = convertD;
 btn2.onclick = convertB;
 btn3.onclick = convertO;
 btn4.onclick = convertH;
 rbtn.onclick = rbtnClick;
-
 </script>
 </body>
 </html>
